@@ -7,3 +7,12 @@ C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.Services\obj\
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.Services\obj\Debug\Chicken.Services.pdb
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.Services\bin\Debug\Chicken.Domain.dll
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.Services\bin\Debug\Chicken.Domain.pdb
+D:\ckns\Chicken.Services\bin\Debug\Chicken.Services.dll
+D:\ckns\Chicken.Services\bin\Debug\Chicken.Services.pdb
+D:\ckns\Chicken.Services\bin\Debug\Chicken.Domain.dll
+D:\ckns\Chicken.Services\bin\Debug\Newtonsoft.Json.dll
+D:\ckns\Chicken.Services\bin\Debug\Chicken.Domain.pdb
+D:\ckns\Chicken.Services\bin\Debug\Newtonsoft.Json.xml
+D:\ckns\Chicken.Services\obj\Debug\Chicken.Services.csprojResolveAssemblyReference.cache
+D:\ckns\Chicken.Services\obj\Debug\Chicken.Services.dll
+D:\ckns\Chicken.Services\obj\Debug\Chicken.Services.pdb

@@ -38,10 +38,9 @@ namespace Chicken.Services
 
             foreach (var post in posts)
             {
-                this._posts.Add(post);
+                this._posts.Add(post); 
+                this._posts.Save();
             }
-
-            this._posts.Save();
         }
 
         #region Helpers
@@ -67,7 +66,7 @@ namespace Chicken.Services
 
             for (var i = 0; i < 1000; i++)
             {
-                var responsePosts = GetChickens(token, 100, i * 100);
+                var responsePosts = GetChickens(token,  i * 100, 100);
                 var newPosts = responsePosts.Where(x => !savedChickens.Contains(x.PostId)).ToList();
 
                 if (!newPosts.Any())

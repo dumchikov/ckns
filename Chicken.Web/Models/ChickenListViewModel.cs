@@ -25,7 +25,11 @@ namespace Chicken.Web.Models
 
             if (post.Attachments != null && post.Attachments.Any())
             {
-                model.Photo = post.Attachments.First().Photo.Photo604Url;
+                var att = post.Attachments.First();
+                if (att.Photo != null)
+                {
+                    model.Photo = att.Photo.Photo604Url;
+                }
             }
 
             return model;

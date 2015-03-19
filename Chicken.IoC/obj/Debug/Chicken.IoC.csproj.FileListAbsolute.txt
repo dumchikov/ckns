@@ -22,3 +22,27 @@ C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.IoC\bin\Debug
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.IoC\bin\Debug\Chicken.Services.pdb
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.IoC\bin\Debug\System.Web.Mvc.dll
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.IoC\bin\Debug\System.Web.Mvc.xml
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.IoC.dll.config
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.IoC.dll
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.IoC.pdb
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.DAL.dll
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.Domain.dll
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.Services.dll
+D:\ckns\Chicken.IoC\bin\Debug\EntityFramework.dll
+D:\ckns\Chicken.IoC\bin\Debug\EntityFramework.SqlServer.dll
+D:\ckns\Chicken.IoC\bin\Debug\Ninject.dll
+D:\ckns\Chicken.IoC\bin\Debug\Ninject.Web.Common.dll
+D:\ckns\Chicken.IoC\bin\Debug\System.Web.Mvc.dll
+D:\ckns\Chicken.IoC\bin\Debug\Newtonsoft.Json.dll
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.DAL.pdb
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.Domain.pdb
+D:\ckns\Chicken.IoC\bin\Debug\Chicken.Services.pdb
+D:\ckns\Chicken.IoC\bin\Debug\EntityFramework.xml
+D:\ckns\Chicken.IoC\bin\Debug\EntityFramework.SqlServer.xml
+D:\ckns\Chicken.IoC\bin\Debug\Ninject.xml
+D:\ckns\Chicken.IoC\bin\Debug\Ninject.Web.Common.xml
+D:\ckns\Chicken.IoC\bin\Debug\System.Web.Mvc.xml
+D:\ckns\Chicken.IoC\bin\Debug\Newtonsoft.Json.xml
+D:\ckns\Chicken.IoC\obj\Debug\Chicken.IoC.csprojResolveAssemblyReference.cache
+D:\ckns\Chicken.IoC\obj\Debug\Chicken.IoC.dll
+D:\ckns\Chicken.IoC\obj\Debug\Chicken.IoC.pdb
