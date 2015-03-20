@@ -20,7 +20,7 @@ namespace Chicken.Web.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetChickens(int skip = 0, int take = 10)
+        public JsonResult GetChickens(int skip = 0, int take = 50)
         {
             var model = _service
                 .GetExisingChickens(skip, take)

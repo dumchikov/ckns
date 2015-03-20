@@ -22,7 +22,7 @@ namespace Chicken.Services
 
         public IEnumerable<Post> GetExisingChickens(int skip, int take)
         {
-            var chickens = _posts.Query().OrderBy(x => x.Date).Skip(skip).Take(take);
+            var chickens = _posts.Query().OrderByDescending(x => x.Date).Skip(skip).Take(take);
             return chickens;
         }
 
