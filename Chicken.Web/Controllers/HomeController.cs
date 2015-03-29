@@ -16,7 +16,7 @@ namespace Chicken.Web.Controllers
 
         public JsonResult Update()
         {
-            _service.AddNewPosts("ddfb4386c9f7f511f299ff67b2e5990819f175896894670d67aae204dd495f2ec96a8ac589dadb3790043");
+            _service.AddNewPosts("0517e6e8668f8d48caa5d0a1acd00fcd16558a64fab17aa9c0245c2b90a8a1eab0c91de2dc36cdf292d37");
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -25,14 +25,14 @@ namespace Chicken.Web.Controllers
             var model = _service
                 .GetExisingChickens(skip, take)
                 .ToList()
-                .Select(ChickenListViewModel.Map);
+                .Select(ListItemViewModel.Map);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetChickenDetails(int id)
         {
             var chicken = _service.GetChicken(id);
-            var model = ChickenViewModel.Map(chicken);
+            var model = DetailsViewModel.Map(chicken);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

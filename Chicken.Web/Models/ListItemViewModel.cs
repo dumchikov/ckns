@@ -3,7 +3,7 @@ using Chicken.Domain.Models;
 
 namespace Chicken.Web.Models
 {
-    public class ChickenListViewModel
+    public class ListItemViewModel
     {
         public int Id { get; set; }
 
@@ -13,9 +13,9 @@ namespace Chicken.Web.Models
 
         public int Likes { get; set; }
 
-        public static ChickenListViewModel Map(Post post)
+        public static ListItemViewModel Map(Post post)
         {
-            var model = new ChickenListViewModel
+            var model = new ListItemViewModel
                 {
                     Id = post.Id,
                     Comments = post.CommentsCount,
