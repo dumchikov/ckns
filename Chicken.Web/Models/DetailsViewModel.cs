@@ -31,41 +31,13 @@ namespace Chicken.Web.Models
                 }
             }
 
-            model.Comments = new List<CommentViewModel>()
+            model.Comments = post.Comments.Select(x => new CommentViewModel
                 {
-                    new CommentViewModel
-                        {
-                            Avatar = "http://cs622227.vk.me/v622227293/26f62/6Wytefh9Vmc.jpg",
-                            Link = "http://vk.com/b_r_u_t_a_l_i_t_y",
-                            Name = "Остап Белых",
-                            Text = "реперский высер)"
-                        },
-
-                                            new CommentViewModel
-                        {
-                            Avatar = "http://cs622227.vk.me/v622227293/26f62/6Wytefh9Vmc.jpg",
-                            Link = "http://vk.com/b_r_u_t_a_l_i_t_y",
-                            Name = "Остап Белых",
-                            Text = "реперский высер)"
-                        },
-
-                                            new CommentViewModel
-                        {
-                            Avatar = "http://cs622227.vk.me/v622227293/26f62/6Wytefh9Vmc.jpg",
-                            Link = "http://vk.com/b_r_u_t_a_l_i_t_y",
-                            Name = "Остап Белых",
-                            Text = "реперский высер)"
-                        },
-
-                                            new CommentViewModel
-                        {
-                            Avatar = "http://cs622227.vk.me/v622227293/26f62/6Wytefh9Vmc.jpg",
-                            Link = "http://vk.com/b_r_u_t_a_l_i_t_y",
-                            Name = "Остап Белых",
-                            Text = "реперский высер)"
-                        }
-
-                };
+                    Avatar = "http://cs622227.vk.me/v622227293/26f62/6Wytefh9Vmc.jpg",
+                    Link = "http://vk.com/b_r_u_t_a_l_i_t_y",
+                    Name = "Остап Белых",
+                    Text = x.Text
+                }).ToList();
 
             return model;
         }
