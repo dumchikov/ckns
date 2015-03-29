@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using Chicken.Domain.Interfaces;
 using Chicken.Domain.Models;
@@ -60,10 +61,61 @@ namespace Chicken.Services
             _posts.Save();
         }
 
-        #region Helpers
-        private static IEnumerable<Post> GetChickens(string token, int skip, int take)
+        public ICollection<Comment> GetComments(int count, int offset, long postId, int ownerId, string accessToken)
         {
-            var url = string.Format(GetPostsUrl, take, skip, token);
+            accessToken = "4678659ecbffd3567799b72c33b3fc540da9dc49c02bf65ff0b3cf29a1894055d2b1013aafa39878b130b";
+            const string secret = "XRxEAyihyEZOlyFcHTpU";
+            const string domain = "https://api.vk.com";
+            var requestString = string.Format("/method/wall.getComments?" +
+                                    "v=5.29&" +
+                                    "extended=1&" +
+                                    "count={0}&" +
+                                    "offset={1}&" +
+                                    "post_id={2}&" +
+                                    "owner_id=-{3}&" +
+                                    "access_token={4}",
+                                    count, offset, postId, ownerId, accessToken);
+            var sig = GetMD5Hash(requestString + secret);
+            var url = string.Format("{0}{1}&sig={2}", domain, requestString, sig);
+            var webClient = new WebClient { Encoding = Encoding.UTF8 };
+            var response = webClient.UploadString(url, string.Empty);
+            var items = JObject.Parse(response).SelectToken("response").SelectToken("items");
+            var comments = items.ToObject<IEnumerable<Comment>>().ToList();
+            return comments;
+        }
+
+        public void UpdateComments()
+        {
+            var posts = _posts.Query().ToList();
+            foreach (var post in posts)
+            {
+                var comments = GetComments(100, 0, post.PostId, 65470032, "");
+                post.Comments = comments;
+                _posts.Edit(post);
+                if (posts.IndexOf(post) % 10 == 0)
+                {
+                    _posts.Save();
+                }
+            }
+        }
+
+        #region Helpers
+        private IEnumerable<Post> GetChickens(string token, int skip, int take)
+        {
+            var accessToken = "4678659ecbffd3567799b72c33b3fc540da9dc49c02bf65ff0b3cf29a1894055d2b1013aafa39878b130b";
+            const string secret = "XRxEAyihyEZOlyFcHTpU";
+            const string domain = "https://api.vk.com";
+            var requestString = string.Format("/method/wall.get?" +
+                                    "v=5.29&" +
+                                    "count={0}&" +
+                                    "offset={1}&" +
+                                    "filter=all&" +
+                                    "domain=koko_kharkov&" +
+                                    "access_token={2}",
+                                    take, skip, accessToken);
+            var sig = GetMD5Hash(requestString + secret);
+
+            var url = string.Format("{0}{1}&sig={2}", domain, requestString, sig);
             var webClient = new WebClient { Encoding = Encoding.UTF8 };
             var response = webClient.DownloadString(url);
             var items = JObject
@@ -80,8 +132,7 @@ namespace Chicken.Services
         {
             var posts = new List<Post>();
             var savedChickens = this._posts.Query().Select(x => x.PostId).ToList();
-
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 5; i++)
             {
                 var responsePosts = GetChickens(token,  i * 100, 100);
                 var newPosts = responsePosts.Where(x => !savedChickens.Contains(x.PostId)).ToList();
@@ -95,6 +146,21 @@ namespace Chicken.Services
             }
 
             return posts;
+        }
+
+        public string GetMD5Hash(string input)
+        {
+            var md5 = MD5.Create();
+            var inputBytes = Encoding.ASCII.GetBytes(input);
+            var hash = md5.ComputeHash(inputBytes);
+
+            var sb = new StringBuilder();
+            for (var i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+
+            return sb.ToString();
         }
 
         #endregion

@@ -21,11 +21,13 @@ namespace Chicken.Domain.Models
 
         [NotMapped]
         [JsonProperty(PropertyName = "comments")]
-        public dynamic Comments { get; set; }
+        public dynamic CommentsObject { get; set; }
 
         [NotMapped]
         [JsonProperty(PropertyName = "likes")]
-        public dynamic Likes { get; set; }
+        public dynamic LikesObject { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }  
 
         public int CommentsCount { get; set; }
 
@@ -36,8 +38,8 @@ namespace Chicken.Domain.Models
 
         public void UpdateLikesAndComments()
         {
-            CommentsCount = Comments.count;
-            LikesCount = Likes.count;
+            CommentsCount = CommentsObject.count;
+            LikesCount = LikesObject.count;
         }
     }
 }

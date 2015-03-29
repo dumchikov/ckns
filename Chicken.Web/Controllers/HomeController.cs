@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web.Mvc;
 using Chicken.Services;
 using Chicken.Web.Models;
@@ -12,6 +14,12 @@ namespace Chicken.Web.Controllers
         public HomeController(ChickenService service)
         {
             _service = service;
+        }
+
+        public JsonResult UpdateComments()
+        {
+            _service.UpdateComments();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Update()

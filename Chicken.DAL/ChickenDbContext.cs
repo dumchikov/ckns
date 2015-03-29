@@ -13,12 +13,6 @@ namespace Chicken.DAL
 
         public DbSet<Attachment> Attachments { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Post>()
-        //                .HasMany<Attachment>(s => s.Attachments)
-        //                .WithRequired(s => s.Post)
-        //                .HasForeignKey(s => s.Id);
-        //}
+        public DbSet<Comment> Comments { get; set; }
     }
 }

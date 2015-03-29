@@ -11,3 +11,16 @@ C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.DAL\bin\Debug
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.DAL\obj\Debug\Chicken.DAL.csprojResolveAssemblyReference.cache
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.DAL\obj\Debug\Chicken.DAL.dll
 C:\Users\Max\Documents\Visual Studio 2012\Projects\Chicken\Chicken.DAL\obj\Debug\Chicken.DAL.pdb
+D:\ckns\Chicken.DAL\bin\Debug\Chicken.DAL.dll
+D:\ckns\Chicken.DAL\bin\Debug\Chicken.DAL.pdb
+D:\ckns\Chicken.DAL\bin\Debug\Chicken.Domain.dll
+D:\ckns\Chicken.DAL\bin\Debug\EntityFramework.dll
+D:\ckns\Chicken.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\ckns\Chicken.DAL\bin\Debug\Newtonsoft.Json.dll
+D:\ckns\Chicken.DAL\bin\Debug\Chicken.Domain.pdb
+D:\ckns\Chicken.DAL\bin\Debug\EntityFramework.xml
+D:\ckns\Chicken.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\ckns\Chicken.DAL\bin\Debug\Newtonsoft.Json.xml
+D:\ckns\Chicken.DAL\obj\Debug\Chicken.DAL.csprojResolveAssemblyReference.cache
+D:\ckns\Chicken.DAL\obj\Debug\Chicken.DAL.dll
+D:\ckns\Chicken.DAL\obj\Debug\Chicken.DAL.pdb
