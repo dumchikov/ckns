@@ -73,7 +73,7 @@ namespace Chicken.Services
             var requestString = string.Format("/method/users.get?" +
                         "v=5.29&" +
                         "user_ids={0}&" +
-                        "fields=photo_50,screen_name", 
+                        "fields=photo_100,screen_name", 
                         string.Join(",", userIds));
 
             var url = string.Format("{0}{1}", domain, requestString);

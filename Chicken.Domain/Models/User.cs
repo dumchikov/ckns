@@ -9,7 +9,7 @@ namespace Chicken.Domain.Models
         [JsonProperty(PropertyName = "id")]
         public int ProfileId { get; set; }
 
-        [JsonProperty(PropertyName = "photo_50")]
+        [JsonProperty(PropertyName = "photo_100")]
         public string Avatar { get; set; }
 
         [JsonProperty(PropertyName = "first_name")]
