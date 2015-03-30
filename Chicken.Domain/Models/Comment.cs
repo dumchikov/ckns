@@ -18,8 +18,10 @@ namespace Chicken.Domain.Models
         public DateTime Date { get; set; }
 
         [JsonProperty(PropertyName = "from_id")]
-        public int UserId { get; set; }
+        public int ProfileId { get; set; }
 
         public virtual Post Post { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
