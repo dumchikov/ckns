@@ -1,5 +1,4 @@
-﻿using System;
-using Chicken.Domain.Models;
+﻿using Chicken.Domain.Models;
 
 namespace Chicken.Web.Models
 {
@@ -19,7 +18,7 @@ namespace Chicken.Web.Models
         {
             return new CommentViewModel
                 {
-                    Date = String.Format("{0:dd/MM/yyyy HH:mm}", comment.Date),
+                    Date = string.Format("{0:dd/MM/yyyy HH:mm}", comment.Date),
                     Text = comment.Text,
                     Avatar = comment.User.Avatar,
                     Link = comment.User.Link,
