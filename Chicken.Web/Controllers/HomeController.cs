@@ -36,7 +36,7 @@ namespace Chicken.Web.Controllers
 
         public JsonResult GetComments(int id)
         {
-            var comments = _service.GetComments(id).ToList();
+            var comments = _service.GetComments(id).OrderByDescending(x=>x.Date).ToList();
             var model = comments.Select(CommentViewModel.Map);
             return Json(model, JsonRequestBehavior.AllowGet);
         }
