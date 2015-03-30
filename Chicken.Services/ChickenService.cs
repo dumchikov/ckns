@@ -53,7 +53,7 @@ namespace Chicken.Services
             post.Comments = comments;
             _posts.Edit(post);
             _posts.Save();
-            return comments;
+            return comments.OrderByDescending(x=>x.Date);
         }
 
         public void AddNewPosts()
