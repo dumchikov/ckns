@@ -33,6 +33,10 @@ namespace Chicken.Domain.Models
 
         public int LikesCount { get; set; }
 
+        public string Avatar { get; set; }
+
+        public bool IsSpam { get; set; }
+
         [JsonProperty(PropertyName = "attachments")]
         public virtual ICollection<Attachment> Attachments { get; set; }
 

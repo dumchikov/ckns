@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Chicken.Web.Models.DetailsViewModel>
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Text</th>
+        <th>Photos</th>
+        <tr>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td style="width: 30%;">
+                        <textarea style="width: 100%; height: 200px;">@m.Text</textarea>
+                    </td>
+                    <td align="center" style="vertical-align: middle; width: 70%;">
+
+                        @foreach (var i in m.Photos)
+                        {
+                            <div style="display: inline-block;">
+                                <img src="@i" width="200" alt="image" /><br />
+                                <input type="radio" name="avatar2" value="1" />
+                            </div>
+                        }
+                    </td>
+                </tr>
+            }
+</table>

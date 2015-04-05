@@ -20,17 +20,8 @@ namespace Chicken.Web.Models
                     Id = post.Id,
                     Comments = post.CommentsCount,
                     Likes = post.LikesCount,
-                    Photo = string.Empty
+                    Photo = post.Avatar
                 };
-
-            if (post.Attachments != null && post.Attachments.Any())
-            {
-                var att = post.Attachments.First();
-                if (att.Photo != null)
-                {
-                    model.Photo = att.Photo.Photo604Url;
-                }
-            }
 
             return model;
         }

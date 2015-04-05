@@ -31,7 +31,6 @@ namespace Chicken.Services
                                     postId, 
                                     ownerId,
                                     accessToken);
-
             var sig = GetMD5Hash(requestString + secret);
             var url = string.Format("{0}{1}&sig={2}", domain, requestString, sig);
             var webClient = new WebClient { Encoding = Encoding.UTF8 };

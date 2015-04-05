@@ -6,7 +6,7 @@ namespace Chicken.Domain.Models
     public class Photo : Entity
     {
         [JsonProperty(PropertyName = "id")]
-        public string Text { get; set; }
+        public string PhotoId { get; set; }
 
         [JsonProperty(PropertyName = "photo_75")]
         public string Photo75Url { get; set; }
