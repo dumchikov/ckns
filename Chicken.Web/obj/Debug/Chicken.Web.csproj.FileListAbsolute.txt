@@ -277,3 +277,5 @@ D:\ckns\Chicken.Web\bin\zh-Hant\System.Spatial.resources.dll
 D:\ckns\Chicken.Web\obj\Debug\Chicken.Web.csprojResolveAssemblyReference.cache
 D:\ckns\Chicken.Web\obj\Debug\Chicken.Web.dll
 D:\ckns\Chicken.Web\obj\Debug\Chicken.Web.pdb
+D:\ckns\Chicken.Web\bin\PushSharp.Core.dll
+D:\ckns\Chicken.Web\bin\PushSharp.Android.dll

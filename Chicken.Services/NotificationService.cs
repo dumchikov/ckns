@@ -1,5 +1,8 @@
-﻿using Chicken.Domain.Interfaces;
+﻿using System.Linq;
+using Chicken.Domain.Interfaces;
 using Chicken.Domain.Models;
+using PushSharp;
+using PushSharp.Android;
 
 namespace Chicken.Services
 {
@@ -20,6 +23,20 @@ namespace Chicken.Services
                 };
             _devices.Add(device);
             _devices.Save();
+        }
+
+        public void Notify()
+        {
+            var devices = _devices.Query().ToList();
+            var push = new PushBroker();
+            push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyBwZSF2O70VxltPsZSDjkqTYn-JpkccPi0"));
+
+            foreach (var device in devices)
+            {
+                push
+                    .QueueNotification(new GcmNotification().ForDeviceRegistrationId(device.RegistrationId)
+                    .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
+            }
         }
     }
 }

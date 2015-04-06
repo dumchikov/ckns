@@ -20,6 +20,7 @@ namespace Chicken.Web.Controllers
         public JsonResult Update()
         {
             _chickenService.AddNewPosts();
+            _notificationService.Notify();
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
