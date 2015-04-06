@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ChickenService.cs" />
     <Compile Include="IChickenService.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\VkAccessToken.cs" />
     <Compile Include="Security\VkontakteService.cs" />

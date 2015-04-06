@@ -14,6 +14,7 @@ namespace Chicken.IoC
             ninjectKernel.Bind<ChickenDbContext>().ToSelf().InRequestScope();
             ninjectKernel.Bind(typeof(IRepository<>)).To(typeof(EFRepository<>));
             ninjectKernel.Bind(typeof (ChickenService)).ToSelf();
+            ninjectKernel.Bind(typeof(NotificationService)).ToSelf();
             return new NinjectDependencyResolver(ninjectKernel);
         }
     }
