@@ -5,11 +5,8 @@ namespace Chicken.Web.Models
     public class ListItemViewModel
     {
         public int Id { get; set; }
-
         public string Photo { get; set; }
-
         public int Comments { get; set; }
-
         public int Likes { get; set; }
 
         public static ListItemViewModel Map(Post post)
