@@ -28,6 +28,7 @@ namespace Chicken.Services
         public void Notify()
         {
             var devices = _devices.Query().ToList();
+
             var push = new PushBroker();
             push.RegisterGcmService(new GcmPushChannelSettings("AIzaSyBwZSF2O70VxltPsZSDjkqTYn-JpkccPi0"));
 

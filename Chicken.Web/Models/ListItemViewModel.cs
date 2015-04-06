@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Chicken.Domain.Models;
+﻿using Chicken.Domain.Models;
 
 namespace Chicken.Web.Models
 {
