@@ -23,7 +23,7 @@ namespace Chicken.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             DependencyResolver.SetResolver(NinjectConfig.GetNinjectDependencyResolver());
 
-            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
+            //HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
         }
     }
 }

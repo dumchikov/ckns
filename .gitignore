@@ -1,4 +1,4 @@
 *.cache
 *.dll
 *.pdb
-Chicken.IoC/bin/Debug/Ninject.xml
+packages/
