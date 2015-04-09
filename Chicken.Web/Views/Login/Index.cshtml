@@ -1,0 +1,18 @@
+﻿@model artgelina.web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form style="max-width: 330px; padding: 15px; margin: 0 auto;" method="POST">
+        <h2>Please sign in</h2>
+        <label style="color: red;">@Html.ValidationSummary()</label>
+        @Html.TextBoxFor(x => x.Login, new { placeholder = "Login", @class = "form-control" })
+        <br />
+        @Html.PasswordFor(x => x.Password, new { placeholder = "Password", @class = "form-control" })
+        <br />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>

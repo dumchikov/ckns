@@ -12,6 +12,8 @@ namespace Chicken.DAL
         public EFRepository(ChickenDbContext context)
         {
             Context = context;
+            Context.Configuration.AutoDetectChangesEnabled = false;
+            Context.Configuration.ValidateOnSaveEnabled = false;
         }
 
         public virtual IQueryable<T> Query()

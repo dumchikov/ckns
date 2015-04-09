@@ -1,30 +1,80 @@
-﻿@model IEnumerable<Chicken.Web.Models.DetailsViewModel>
+﻿@model dynamic
 @{
     ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table table-bordered">
-    <tr>
-        <th>Text</th>
-        <th>Photos</th>
-        <tr>
-            @foreach (var m in Model)
-            {
-                <tr>
-                    <td style="width: 30%;">
-                        <textarea style="width: 100%; height: 200px;">@m.Text</textarea>
-                    </td>
-                    <td align="center" style="vertical-align: middle; width: 70%;">
+<div class="container" ng-app="app">
+    <div class="row" style="margin: 20px 0;" ng-controller="AdminController" ng-init="init(@Model.totalCount, @Model.spamCount)">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Курочки Харькова</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#">Всего историй: <span class="badge">{{totalCount}}</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Спам <span class="badge">{{spamCount}}</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Показано историй <span class="badge">{{posts.length}}</span></a>
+                        </li>
+                    </ul>
 
-                        @foreach (var i in m.Photos)
-                        {
-                            <div style="display: inline-block;">
-                                <img src="@i" width="200" alt="image" /><br />
-                                <input type="radio" name="avatar2" value="1" />
-                            </div>
-                        }
-                    </td>
-                </tr>
-            }
-</table>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button style="margin-right: 10px;" class="btn btn-primary navbar-btn" ng-disabled="" ng-click="">
+                                Сохранить
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary navbar-btn" ng-disabled="isUpdating" ng-click="loadNewPosts()">
+                                Загрузить новые истории
+                            </button>
+                        </li>
+                        <li>
+                            @Html.ActionLink("Выход", "LogOff", "Login")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Спам</th>
+                <th>Аватар</th>
+                <th>Текст</th>
+                
+@*                <th>Photos</th>*@
+            </tr>
+
+            <tr ng-repeat="post in posts" ng-class="post.IsSpam ? 'spam' : ''">
+                <td align="center" style="vertical-align: middle;">
+                    <input type="checkbox" ng-model="post.IsSpam">
+                </td>
+                
+                 <td  align="center" style="vertical-align: middle;">
+                    <img ng-src="{{post.Avatar}}" width="200" />
+                </td>
+
+                <td>
+                    <textarea style="width: 100%; resize: none; height: 300px;">{{post.Text}}</textarea>
+                </td>
+
+
+
+@*                <td align="center" style="vertical-align: middle; width: 30%;">
+                    <img ng-repeat="photo in post.Photos" ng-src="{{photo}}">
+                </td>*@
+            </tr>
+        </table>
+        <div class="row text-center">
+            <button class="btn btn-primary" ng-disabled="isLoading" ng-click="getPosts()">Еще</button>
+        </div>
+    </div>
+</div>

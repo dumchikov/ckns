@@ -8,11 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="@Url.Content("~/Bootstrap/js/bootstrap.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.photoset-grid.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/main.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular.min.js")"></script>
 </head>
-<body>
-    <div class="container">
+    <body>
         @RenderBody()
-    </div>
-</body>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/admin.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/main.js")"></script>
+    </body>
 </html>

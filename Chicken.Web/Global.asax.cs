@@ -22,6 +22,8 @@ namespace Chicken.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             DependencyResolver.SetResolver(NinjectConfig.GetNinjectDependencyResolver());
+
+            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
         }
     }
 }

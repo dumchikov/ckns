@@ -25,7 +25,7 @@ namespace Chicken.Services
             _devices.Save();
         }
 
-        public void Notify()
+        public void Notify(int newPostsCount)
         {
             var devices = _devices.Query().ToList();
 
@@ -36,7 +36,7 @@ namespace Chicken.Services
             {
                 push
                     .QueueNotification(new GcmNotification().ForDeviceRegistrationId(device.RegistrationId)
-                    .WithJson("{\"alert\":\"Hello World!\",\"badge\":7,\"sound\":\"sound.caf\"}"));
+                    .WithJson(string.Format("{{\"newPostsCount\":{0}}}", newPostsCount)));
             }
         }
     }

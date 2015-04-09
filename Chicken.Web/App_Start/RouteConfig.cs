@@ -12,7 +12,7 @@ namespace Chicken.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Api", action = "GetPosts", id = UrlParameter.Optional }
+                defaults: new { controller = "Api", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

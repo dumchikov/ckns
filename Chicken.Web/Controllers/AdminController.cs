@@ -1,10 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Dynamic;
+using System.Web.Mvc;
 using Chicken.Services;
 using System.Linq;
-using Chicken.Web.Models;
+using Chicken.Web.Models.Admin;
 
 namespace Chicken.Web.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly ChickenService _chickenService;
@@ -14,25 +16,25 @@ namespace Chicken.Web.Controllers
             _chickenService = chickenService;
         }
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index()
         {
-            const int take = 10;
-            var skip = page == 1 ? 0 : page*take;
-            var posts = _chickenService.GetPosts(skip, take).ToList();
-            var model = posts.Select(DetailsViewModel.Map);
+            dynamic model = new ExpandoObject();
+            model.totalCount = _chickenService.GetPostsCount();
+            model.spamCount = _chickenService.GetSpamCount();
             return View(model);
         }
 
-        public ActionResult RemoveText()
+        public JsonResult GetPosts(int skip = 0, int take = 10)
         {
-            const string text = @"**Информацию присылают участники, администрация группы ответственности не несет! Мнение автора и администрации может не совпадать! Истории вымышленные, любое сходство чисто случайно, в случае совпадения писать администратору сообщества 
+            var posts = _chickenService.GetPosts(skip, take, true).ToList();
+            var model = posts.Select(AdminPostViewModel.Map);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
 
-ЗА ССЫЛКИ И ОСКОРБЛЕНИЯ БАН!!!!ОБЩАЙТЕСЬ ВЕЖЛИВО СУДАРИ
-
-";
-
-            _chickenService.RemoveTextFromAllPosts(text);
-            return Content("ok");
+        public JsonResult Update()
+        {
+            _chickenService.AddNewPosts();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

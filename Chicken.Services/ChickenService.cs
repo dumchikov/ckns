@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using Chicken.Domain.Interfaces;
 using Chicken.Domain.Models;
 using System.Linq;
@@ -11,13 +12,16 @@ namespace Chicken.Services
 {
     public class ChickenService : IChickenService
     {
+        private readonly NotificationService _notificationService;
+
         private readonly VkApi _api = new VkApi();
 
         private readonly IRepository<Post> _posts;
 
-        public ChickenService(IRepository<Post> posts)
+        public ChickenService(IRepository<Post> posts, NotificationService notificationService)
         {
             _posts = posts;
+            _notificationService = notificationService;
         }
 
         public Post GetPost(int id)
@@ -26,16 +30,22 @@ namespace Chicken.Services
             return chicken;
         }
 
-        public IEnumerable<Post> GetPosts(int skip, int take)
+        public int GetPostsCount()
         {
-            var chickens =
-                _posts
-                .Query()
-                .Where(x => !x.IsSpam)
-                .OrderByDescending(x => x.Date)
-                .Skip(skip)
-                .Take(take);
-            return chickens;
+            return _posts.Query().Count();
+        }
+
+        public int GetSpamCount()
+        {
+            return _posts.Query().Count(x => x.IsSpam);
+        }
+
+        public IEnumerable<Post> GetPosts(int skip, int take, bool withSpam = false)
+        {
+            var query = _posts.Query();
+            if (!withSpam) { query = query.Where(x => !x.IsSpam); }
+            query = query.OrderByDescending(x => x.Date).Skip(skip).Take(take);
+            return query;
         }
 
         public IEnumerable<Comment> GetComments(int id)
@@ -58,31 +68,41 @@ namespace Chicken.Services
             post.Comments = comments;
             _posts.Edit(post);
             _posts.Save();
-            return comments.OrderBy(x => x.Date);
+            return comments;
         }
 
         public void AddNewPosts()
         {
             var posts = GetNewPosts()
-                .Where(
-                x =>
-                    !string.IsNullOrEmpty(x.Text)
-                    && x.Attachments != null
-                    && x.Attachments.Any());
+                .Where(x =>
+                !string.IsNullOrEmpty(x.Text)
+                && x.Attachments != null
+                && x.Attachments.Any())
+                .ToList();
 
+            var regex = new Regex(@"\*\*Информаци(.|\n)*СУДАРИ\n*");
             foreach (var post in posts)
             {
-                SetAvatar(post);
-                this._posts.Add(post);
-                this._posts.Save();
+                try
+                {
+                    SetAvatar(post);
+                    ModifyText(post, regex);
+                    this._posts.Add(post);
+                }
+                catch
+                {
+                }
             }
+
+            this._posts.Save();
+            _notificationService.Notify(posts.Count());
         }
 
         private IEnumerable<Post> GetNewPosts()
         {
             var posts = new List<Post>();
             var savedChickens = this._posts.Query().Select(x => x.PostId).ToList();
-            for (var i = 0; i < 1; i++)
+            for (var i = 0; i < 1000; i++)
             {
                 var responsePosts = _api.GetPosts(i * 100, 100);
                 var newPosts = responsePosts.Where(x => !savedChickens.Contains(x.PostId)).ToList();
@@ -98,19 +118,12 @@ namespace Chicken.Services
             return posts;
         }
 
-        public void RemoveTextFromAllPosts(string text)
+        private static void ModifyText(Post post, Regex regex)
         {
-            var posts = GetPosts(0, 10);
-            foreach (var post in posts)
-            {
-                post.Text = post.Text.Replace(text, "");
-                _posts.Edit(post);
-            }
-
-            _posts.Save();
+            post.Text = regex.Replace(post.Text, string.Empty);
         }
 
-        public void SetAvatar(Post post)
+        private static void SetAvatar(Post post)
         {
             if (post.Attachments != null)
             {
@@ -122,6 +135,11 @@ namespace Chicken.Services
                     .Where(x => x.Photo != null && x.Photo.Photo604Url != null)
                     .Select(x => x.Photo.Photo604Url)
                     .ToList();
+
+                if (!photos.Any())
+                {
+                    return;
+                }
 
                 if (photos.Count() == 1)
                 {

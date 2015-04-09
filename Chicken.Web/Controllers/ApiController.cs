@@ -17,13 +17,6 @@ namespace Chicken.Web.Controllers
             _notificationService = notificationService;
         }
 
-        public JsonResult Update()
-        {
-            _chickenService.AddNewPosts();
-            _notificationService.Notify();
-            return Json(true, JsonRequestBehavior.AllowGet);
-        }
-
         public JsonResult GetPosts(int skip = 0, int take = 50)
         {
             var posts = _chickenService.GetPosts(skip, take).ToList();

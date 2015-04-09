@@ -7,7 +7,7 @@ namespace Chicken.Services
     {
         Post GetPost(int id);
 
-        IEnumerable<Post> GetPosts(int skip, int take);
+        IEnumerable<Post> GetPosts(int skip, int take, bool withSpam = false);
 
         IEnumerable<Comment> GetComments(int id);
 
