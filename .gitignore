@@ -2,3 +2,6 @@
 *.dll
 *.pdb
 packages/
+bin/
+obj/
+*.suo

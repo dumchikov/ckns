@@ -11,6 +11,6 @@ namespace Chicken.Services
 
         IEnumerable<Comment> GetComments(int id);
 
-        void AddNewPosts();
+        IEnumerable<Post> AddNewPosts();
     }
 }

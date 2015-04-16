@@ -33,8 +33,9 @@ namespace Chicken.Web.Controllers
 
         public JsonResult Update()
         {
-            _chickenService.AddNewPosts();
-            return Json(true, JsonRequestBehavior.AllowGet);
+            var posts = _chickenService.AddNewPosts();
+            var model = posts.OrderByDescending(x => x.Date).Select(AdminPostViewModel.Map);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

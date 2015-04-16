@@ -6,6 +6,10 @@
       $scope.isLoading = false;
       $scope.isUpdating = false;
       
+      $scope.$watchCollection('posts', function (news, olds) {
+          debugger;
+      });
+      
       $scope.init = function (totalCount, spamCount) {
           $scope.totalCount = totalCount;
           $scope.spamCount = spamCount;
@@ -25,8 +29,11 @@
 
       $scope.loadNewPosts = function () {
           $scope.isUpdating = true;
-          $http.get('admin/update').success(function(data) {
-              $scope.isUpdating = false;
+          $http.get('admin/update').success(function (data) {
+              for (var i = 0; i < data.length; i++) {
+                  $scope.posts.unshift(data[i]);
+                  $scope.isUpdating = false;
+              }
           });
       };
 

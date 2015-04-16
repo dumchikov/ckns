@@ -71,7 +71,7 @@ namespace Chicken.Services
             return comments;
         }
 
-        public void AddNewPosts()
+        public IEnumerable<Post> AddNewPosts()
         {
             var posts = GetNewPosts()
                 .Where(x =>
@@ -96,6 +96,7 @@ namespace Chicken.Services
 
             this._posts.Save();
             _notificationService.Notify(posts.Count());
+            return posts;
         }
 
         private IEnumerable<Post> GetNewPosts()
