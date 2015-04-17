@@ -17,9 +17,9 @@
               $scope.isLoading = true;
               $http.get('admin/getposts?skip=' + $scope.posts.length).success(function (data) {
                   for (var i = 0; i < data.length; i++) {
-                      $scope.posts.push(data[i]);
-                      $scope.isLoading = false;
+                      $scope.posts.push(data[i]);                      
                   }
+				  $scope.isLoading = false;
               });
           }
       };
@@ -41,9 +41,9 @@
           $scope.isUpdating = true;
           $http.get('admin/update').success(function (data) {
               for (var i = 0; i < data.length; i++) {
-                  $scope.posts.unshift(data[i]);
-                  $scope.isUpdating = false;
+                  $scope.posts.unshift(data[i]);                  
               }
+			  $scope.isUpdating = false;
           });
       };
 
