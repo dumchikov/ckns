@@ -3,13 +3,10 @@
       $scope.totalCount = 0;
       $scope.spamCount = 0;
       $scope.posts = [];
+      $scope.modifiedPosts = [];
       $scope.isLoading = false;
       $scope.isUpdating = false;
-      
-      $scope.$watchCollection('posts', function (news, olds) {
-          debugger;
-      });
-      
+
       $scope.init = function (totalCount, spamCount) {
           $scope.totalCount = totalCount;
           $scope.spamCount = spamCount;
@@ -25,6 +22,19 @@
                   }
               });
           }
+      };
+
+      $scope.changePost = function (el) {
+          if (!$scope.modifiedPosts.contains(el)) {
+              $scope.modifiedPosts.push(el);
+          }
+      };
+
+      $scope.save = function () {
+          var modifiedPosts = $scope.modifiedPosts;
+          $http.post('admin/save', modifiedPosts).success(function () {
+              alert('Изменения сохранены.');
+          });
       };
 
       $scope.loadNewPosts = function () {

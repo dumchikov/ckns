@@ -9,6 +9,8 @@ namespace Chicken.Services
 
         IEnumerable<Post> GetPosts(int skip, int take, bool withSpam = false);
 
+        void EditPost(Post post);
+
         IEnumerable<Comment> GetComments(int id);
 
         IEnumerable<Post> AddNewPosts();

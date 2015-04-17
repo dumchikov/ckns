@@ -1,4 +1,5 @@
-﻿using System.Dynamic;
+﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Web.Mvc;
 using Chicken.Services;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Chicken.Web.Controllers
             return View(model);
         }
 
-        public JsonResult GetPosts(int skip = 0, int take = 10)
+        public JsonResult GetPosts(int skip = 0, int take = 100)
         {
             var posts = _chickenService.GetPosts(skip, take, true).ToList();
             var model = posts.Select(AdminPostViewModel.Map);
@@ -36,6 +37,22 @@ namespace Chicken.Web.Controllers
             var posts = _chickenService.AddNewPosts();
             var model = posts.OrderByDescending(x => x.Date).Select(AdminPostViewModel.Map);
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Save(IList<AdminPostViewModel> models)
+        {
+            if (models != null)
+            {
+                foreach (var model in models)
+                {
+                    var post = _chickenService.GetPost(model.Id);
+                    post.IsSpam = model.IsSpam;
+                    _chickenService.EditPost(post);
+                }
+            }
+
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
     }
 }

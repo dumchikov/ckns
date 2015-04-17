@@ -26,7 +26,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <button style="margin-right: 10px;" class="btn btn-primary navbar-btn" ng-disabled="" ng-click="">
+                            <button style="margin-right: 10px;" class="btn btn-primary navbar-btn" ng-click="save()">
                                 Сохранить
                             </button>
                         </li>
@@ -49,13 +49,11 @@
                 <th>Спам</th>
                 <th>Аватар</th>
                 <th>История</th>
-                
-@*                <th>Photos</th>*@
             </tr>
 
             <tr ng-repeat="post in posts" ng-class="post.IsSpam ? 'spam' : ''">
                 <td align="center" style="vertical-align: middle;">
-                    <input type="checkbox" ng-model="post.IsSpam">
+                    <input type="checkbox" ng-model="post.IsSpam" ng-change="changePost(post)">
                 </td>
                 
                  <td  align="center" style="vertical-align: middle;">
@@ -63,14 +61,9 @@
                 </td>
 
                 <td>
-                    <textarea style="width: 100%; resize: none; height: 300px;">{{post.Text}}</textarea>
+                    <span style="font-style: italic;">{{post.Date}}</span>
+                    <p>{{post.Text}}</p>
                 </td>
-
-
-
-@*                <td align="center" style="vertical-align: middle; width: 30%;">
-                    <img ng-repeat="photo in post.Photos" ng-src="{{photo}}">
-                </td>*@
             </tr>
         </table>
         <div class="row text-center">

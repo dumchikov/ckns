@@ -48,27 +48,32 @@ namespace Chicken.Services
             return query;
         }
 
+        public void EditPost(Post post)
+        {
+            _posts.Edit(post);
+            _posts.Save();
+        }
+
         public IEnumerable<Comment> GetComments(int id)
         {
             var post = _posts.GetById(id);
             var comments = post.Comments;
-            if (comments != null && comments.Any())
+            if (comments == null || !comments.Any())
             {
-                return comments;
+                comments = _api.GetComments(100, 0, post.PostId).Where(x => !string.IsNullOrEmpty(x.Text)).ToList();
+                var userIds = comments.Select(x => x.ProfileId).ToList();
+                var users = _api.GetUsers(userIds).ToList();
+                foreach (var comment in comments)
+                {
+                    comment.User = users.Single(x => x.ProfileId == comment.ProfileId);
+                }
+
+                post.Comments = comments;
+                _posts.Edit(post);
+                _posts.Save();
             }
 
-            comments = _api.GetComments(100, 0, post.PostId).Where(x => !string.IsNullOrEmpty(x.Text)).ToList();
-            var userIds = comments.Select(x => x.ProfileId).ToList();
-            var users = _api.GetUsers(userIds).ToList();
-            foreach (var comment in comments)
-            {
-                comment.User = users.Single(x => x.ProfileId == comment.ProfileId);
-            }
-
-            post.Comments = comments;
-            _posts.Edit(post);
-            _posts.Save();
-            return comments;
+            return comments.OrderBy(x => x.Date);
         }
 
         public IEnumerable<Post> AddNewPosts()
@@ -87,14 +92,14 @@ namespace Chicken.Services
                 {
                     SetAvatar(post);
                     ModifyText(post, regex);
-                    this._posts.Add(post);
+                    _posts.Add(post);
                 }
                 catch
                 {
                 }
             }
 
-            this._posts.Save();
+            _posts.Save();
             _notificationService.Notify(posts.Count());
             return posts;
         }
