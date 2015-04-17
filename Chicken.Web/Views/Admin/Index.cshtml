@@ -61,8 +61,8 @@
                 </td>
 
                 <td>
-                    <span style="font-style: italic;">{{post.Date}}</span>
-                    <p>{{post.Text}}</p>
+                    <span style="font-style: italic;">{{post.Date}}</span><br/>
+                    <textarea style="overflow: auto; width: 100%; height: 300px;" ng-model="post.Text" ng-change="changePost(post)"></textarea>
                 </td>
             </tr>
         </table>

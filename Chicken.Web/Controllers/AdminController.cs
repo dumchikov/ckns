@@ -48,6 +48,7 @@ namespace Chicken.Web.Controllers
                 {
                     var post = _chickenService.GetPost(model.Id);
                     post.IsSpam = model.IsSpam;
+                    post.Text = model.Text;
                     _chickenService.EditPost(post);
                 }
             }
